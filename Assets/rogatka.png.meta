@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aba4369d0e9d62e46bb8684a9267dc87
+guid: 182f2b5e43a6d7d44bf7a8ed0a9ff324
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5432879991434614106
-    second: pric_0
+      213: 4411393174590405690
+    second: rogatka_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pric_0
+      name: rogatka_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 360
-        height: 360
+        width: 348
+        height: 696
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6aa6633be688a94b0800000000000000
-      internalID: -5432879991434614106
+      spriteID: a3c3b0048ba683d30800000000000000
+      internalID: 4411393174590405690
       vertices: []
       indices: 
       edges: []
