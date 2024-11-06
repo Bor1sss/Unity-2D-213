@@ -10,7 +10,9 @@ public class Diamondscript : MonoBehaviour
     private Vector2 startDragPosition;
     private Vector2 releasePosition;
     private bool isDragging = false;
-
+    public static Vector2 currentForce;
+    
+    [SerializeField] private float maxForce = 300f;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -19,21 +21,27 @@ public class Diamondscript : MonoBehaviour
 
     void Update()
     {
-        // Начало перетаскивания при нажатии левой кнопкой мыши
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             startDragPosition = Input.mousePosition;
             isDragging = true;
+
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            releasePosition = Input.mousePosition;
             
         }
 
-        // Завершение перетаскивания и запуск объекта
-        if (Input.GetKeyUp(KeyCode.Mouse0) && isDragging)
+    if (Input.GetKeyUp(KeyCode.Mouse0) && isDragging)
         {
             releasePosition = Input.mousePosition;
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             Vector2 force = (startDragPosition - releasePosition) * 2; 
-            rb2d.AddForce(force);
+            currentForce= NormoliseForce(force);
+            rb2d.AddForce(currentForce);
             isDragging = false;
         }
 
@@ -50,7 +58,18 @@ public class Diamondscript : MonoBehaviour
         if (isDragging)
         {
             Vector2 currentMousePosition = (Input.mousePosition);
-      
+            Vector2 force = (startDragPosition - currentMousePosition) * 2; 
+            currentForce= NormoliseForce(force);
         }
+    }
+
+    Vector2 NormoliseForce(Vector2 force)
+    {
+        Vector2 newForce=force;
+        newForce.x = newForce.x > maxForce ? maxForce : newForce.x;
+        newForce.y = newForce.y > maxForce ? maxForce : newForce.y;
+        /*newForce.x = newForce.x < 0 ? 0 : newForce.x;
+        newForce.y = newForce.y < 0 ? 0 : newForce.y;*/
+        return newForce;
     }
 }
