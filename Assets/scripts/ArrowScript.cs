@@ -12,7 +12,20 @@ public class ArrowScript : MonoBehaviour
 
     void Update()
     {
-       
+        {
+            float dy = Input.GetAxis("Vertical");
+            float curRotAngle = NormalizeAngle(this.transform.eulerAngles.z);
+            if (curRotAngle > 180)
+            {
+                curRotAngle -= 180;
+            }
+
+            if (curRotAngle + dy > minRotAngle && curRotAngle + dy < maxRotAngle)
+            {
+                this.transform.RotateAround(rotAnchor.position, Vector3.forward, dy);
+
+            }
+        }
         if (Input.GetMouseButtonDown(0))
         {
             lastMousePosition = Input.mousePosition;
@@ -20,6 +33,7 @@ public class ArrowScript : MonoBehaviour
           
         if (Input.GetMouseButton(0))
         {
+            
             Vector2 currentMousePosition = Input.mousePosition;
             float dy = currentMousePosition.y - lastMousePosition.y;
 

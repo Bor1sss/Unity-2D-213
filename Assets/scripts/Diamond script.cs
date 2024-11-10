@@ -5,14 +5,17 @@ using UnityEngine;
 public class Diamondscript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
+    [SerializeField]
+    private Transform arrow;
+    
     private Rigidbody2D rb2d;
     private Vector2 startDragPosition;
     private Vector2 releasePosition;
     private bool isDragging = false;
     public static Vector2 currentForce;
-    
-    [SerializeField] private float maxForce = 300f;
+    [SerializeField]
+    private float minForce = 100f;
+    [SerializeField] private float maxForce = 400f;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -21,7 +24,13 @@ public class Diamondscript : MonoBehaviour
 
     void Update()
     {
-
+        if (Input. GetKeyDown(KeyCode.Space))
+        {
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
+            float forceAmplitude = minForce +
+                                   (maxForce - minForce) * ForceIndicatorScript.forceFactor;
+            rb2d.AddForce(arrow.right*forceAmplitude);
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             startDragPosition = Input.mousePosition;
@@ -47,7 +56,7 @@ public class Diamondscript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-           rb2d.AddTorque(-100);
+          // rb2d.AddTorque(-100);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
